@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FileController@index');
+
+Route::post('/upload', 'FileController@upload')->name('upload');
