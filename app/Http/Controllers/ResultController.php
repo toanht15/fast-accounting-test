@@ -9,7 +9,7 @@ class ResultController extends Controller
 {
     public function show($imageId)
     {
-        $result = Result::where('image', '=', $imageId)->first();
+        $result = Result::where('image_id', '=', $imageId)->first();
 
         return view('result', ['result' => $result]);
     }

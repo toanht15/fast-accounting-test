@@ -29,7 +29,6 @@ class FileController extends Controller
         ]);
 
         $file = $request->file('fileToUpload');
-
         $fileName = $file->hashName();
         $file->move(public_path('files'), $fileName);
         $url = url('files/' . $fileName);
@@ -40,46 +39,34 @@ class FileController extends Controller
         $f->url = $url;
         $f->save();
 
-        return back()
-            ->with('success','You have successfully upload image.');
+        return back()->with('success','You have successfully upload image.');
     }
 
     public function convertToImage($fileId)
     {
         $file = File::find($fileId);
         $apiClient = new ApiClient();
-        $response = $apiClient->request('convert_to_jpg', $file->url);
 
-        foreach ($response->data->image as $image) {
-            $image = str_replace('data:image/jpg;base64,', '', $image);
-            $image = str_replace(' ', '+', $image);
-            $imageName = str_random(10).'.'.'jpg';
-            \File::put(public_path('images/' . $imageName), base64_decode($image));
+        try {
+            $response = $apiClient->request('convert_to_jpg', $file->url);
 
-            $img = new Image();
-            $img->file_id = $fileId;
-            $img->url = url('images/' . $imageName);
+            foreach ($response->data->image as $image) {
+                $image = str_replace('data:image/jpg;base64,', '', $image);
+                $image = str_replace(' ', '+', $image);
+                $imageName = str_random(10).'.'.'jpg';
+                \File::put(public_path('images/' . $imageName), base64_decode($image));
 
-            $img->save();
+                $img = new Image();
+                $img->file_id = $fileId;
+                $img->url = url('images/' . $imageName);
+
+                $img->save();
+            }
+
+            return back()->with('success','Converted successfully');
+        } catch (\Exception $exception) {
+            return back()->with('error','Failed');
         }
 
-        return back();
-    }
-
-    public function getOrc($imageId)
-    {
-        $image = Image::find($imageId);
-        $apiClient = new ApiClient();
-        $response = $apiClient->request('receipt', $image->url);
-
-        $result = new Result();
-        $result->image_id = $imageId;
-        $result->note = $response->note;
-        $result->date = $response->date;
-        $result->amount = $response->amount;
-        $result->tel = $response->tel;
-        $result->save();
-
-        return back();
     }
 }
