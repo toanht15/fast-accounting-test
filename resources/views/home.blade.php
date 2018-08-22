@@ -92,7 +92,7 @@
                     <td class="text-center"><a href="{{$image->url}}">{{$image->url}}</a></td>
                     <td class=" text-center">{{$image->result}}</td>
                     <td class="text-center"><a href="{{URL::route('get_orc_result', ['id' => $image->id])}}">Convert to ORC</a></td>
-                    <td class="text-center"><a href="{{URL::route('show_result', ['imageId' => $file->id])}}">View Result</a></td>
+                    <td class="text-center"><a href="{{URL::route('view_result', ['imageId' => $file->id])}}">View Result</a></td>
                 </tr>
             @endforeach
             </tbody>
