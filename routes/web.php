@@ -15,3 +15,4 @@ Route::get('/', 'FileController@index');
 
 Route::post('/upload', 'FileController@upload')->name('upload');
 Route::get('/convert_to_image/{id}', 'FileController@convertToImage')->name('convert_to_image');
+Route::get('/get_orc_result/{id}', 'FileController@getOrc')->name('get_orc_result');

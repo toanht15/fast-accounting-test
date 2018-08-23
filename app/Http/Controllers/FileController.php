@@ -57,10 +57,22 @@ class FileController extends Controller
 
             $img = new Image();
             $img->file_id = $fileId;
-            $img->url = public_path('images/' . $imageName);
+            $img->url = url('images/' . $imageName);
 
             $img->save();
         }
+
+        return back();
+    }
+
+    public function getOrc($imageId)
+    {
+        $image = Image::find($imageId);
+        $apiClient = new ApiClient();
+        $response = $apiClient->request('receipt', $image->url);
+
+        $image->result = (string)$response;
+        $image->save();
 
         return back();
     }

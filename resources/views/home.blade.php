@@ -78,17 +78,19 @@
         <table class="table table-striped" id="datatable-buttons">
             <thead>
             <tr class="headings">
-                <th class="column-title" style="width:5%;">ID</th>
-                <th class="column-title text-center">Name</th>
+                <th class="column-title" style="width:5%;">File ID</th>
                 <th class="column-title text-center">URL</th>
+                <th class="column-title text-center">Result</th>
+                <th class="column-title text-center">Action</th>
             </tr>
             </thead>
             <tbody>
             @foreach($images as $image)
                 <tr class="even pointer">
                     <td class=" text-center">{{$image->file_id}}</td>
-                    <td class=" text-center">{{$image->result}}</td>
                     <td class="text-center"><a href="{{$image->url}}">{{$image->url}}</a></td>
+                    <td class=" text-center">{{$image->result}}</td>
+                    <td class="text-center"><a href="{{URL::route('get_orc_result', ['id' => $image->id])}}">Convert to ORC</a></td>
                 </tr>
             @endforeach
             </tbody>
