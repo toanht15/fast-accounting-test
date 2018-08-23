@@ -16,7 +16,7 @@
         <table class="table table-striped" id="datatable-buttons">
             <thead>
             <tr class="headings">
-                <th class="column-title" style="width:5%;">Note</th>
+                <th class="column-title text-center">Note</th>
                 <th class="column-title text-center">Date</th>
                 <th class="column-title text-center">Amount</th>
                 <th class="column-title text-center">Tel</th>

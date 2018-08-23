@@ -91,7 +91,6 @@
             <tr class="headings">
                 <th class="column-title" style="width:5%;">File ID</th>
                 <th class="column-title text-center">URL</th>
-                <th class="column-title text-center">Result</th>
                 <th class="column-title text-center">Action</th>
                 <th class="column-title text-center">Result</th>
             </tr>
@@ -101,7 +100,6 @@
                 <tr class="even pointer">
                     <td class="text-center">{{$image->file_id}}</td>
                     <td class="text-center"><a href="{{$image->url}}">{{$image->url}}</a></td>
-                    <td class="text-center">{{$image->result}}</td>
                     <td class="text-center">@if(!isset($image->image_id))<a href="{{URL::route('get_orc_result', ['id' => $image->id])}}">Get ORC result</a>@endif</td>
                     <td class="text-center">@if(isset($image->image_id))<a href="{{URL::route('view_result', ['imageId' => $file->id])}}">View Result</a>@endif</td>
                 </tr>
