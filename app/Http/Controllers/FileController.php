@@ -32,8 +32,32 @@ class FileController extends Controller
         $apiClient = new ApiClient();
 
         $response = $apiClient->convertPdf($url);
+//        $response = '{
+//    "result": "SUCCESS",
+//    "data": {
+//        "parent_id": "aabbccddee",
+//        "lid": "21_20180205105158.7579_8810",
+//        "image": [
+//            "/* base64 */",
+//            "/* base64 */",
+//            ・・・
+//        ],
+//    }
+//}';
+//        $res = [
+//            "result" => "SUCCESS",
+//            "data" => [
+//                "parent_id" => "aabbccddee",
+//            "lid" => "21_20180205105158.7579_8810",
+//            "image" => "aaaa",
+//            ]
+//        ];
+//        $res = json_encode($res);
+        $response = $response->getBody()->getContents();
 
-        dd($response->getBody()->getContents());
+        $response = json_decode($response);
+
+        dd($response->data->image);
 
 
 
