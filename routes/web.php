@@ -14,3 +14,4 @@
 Route::get('/', 'FileController@index');
 
 Route::post('/upload', 'FileController@upload')->name('upload');
+Route::get('/convert_to_image/{id}', 'FileController@convertToImage')->name('convert_to_image');

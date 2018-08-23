@@ -5,12 +5,12 @@ namespace App\Classes;
 use GuzzleHttp\Client;
 
 class ApiClient {
-    private $apiDomain = 'https://api-sandbox.fastaccounting.jp/v1.3/receipt';
+    private $apiDomain = 'https://api-sandbox.fastaccounting.jp/v1.5/';
 
-    public function convertPdf($fileUrl)
+    public function request($endpoint = 'receipt', $fileUrl)
     {
         $client = new Client();
-        $response = $client->request('POST', $this->apiDomain, [
+        $response = $client->request('POST', $this->apiDomain . $endpoint, [
             'multipart' => [
                 [
                     'name'     => 'file',
@@ -18,6 +18,10 @@ class ApiClient {
                 ]
             ]
         ]);
+
+        $response = $response->getBody()->getContents();
+
+        $response = json_decode($response);
 
         return $response;
     }

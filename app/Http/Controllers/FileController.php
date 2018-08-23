@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Classes\ApiClient;
 use App\File;
+use App\Image;
 use Illuminate\Http\Request;
 
 class FileController extends Controller
@@ -11,9 +12,12 @@ class FileController extends Controller
     public function index()
     {
         $files = File::all();
+        $images = Image::all();
+
 
         return view()->make('home', [
-            'files' => $files
+            'files' => $files,
+            'images' => $images
         ]);
     }
 
@@ -27,41 +31,8 @@ class FileController extends Controller
 
         $fileName = $file->hashName();
         $file->move(public_path('files'), $fileName);
-//        $url = url('files/' . $fileName);
-        $url = url('images/test.jpg');
-
-        $apiClient = new ApiClient();
-
-        $response = $apiClient->convertPdf($url);
-//        $response = '{
-//    "result": "SUCCESS",
-//    "data": {
-//        "parent_id": "aabbccddee",
-//        "lid": "21_20180205105158.7579_8810",
-//        "image": [
-//            "/* base64 */",
-//            "/* base64 */",
-//            ・・・
-//        ],
-//    }
-//}';
-//        $res = [
-//            "result" => "SUCCESS",
-//            "data" => [
-//                "parent_id" => "aabbccddee",
-//            "lid" => "21_20180205105158.7579_8810",
-//            "image" => "aaaa",
-//            ]
-//        ];
-//        $res = json_encode($res);
-        $response = $response->getBody()->getContents();
-
-        $response = json_decode($response);
-
-        dd($response);
-
-
-
+        $url = url('files/' . $fileName);
+        
 
         $f = new File();
         $f->name = $file->getClientOriginalName();
@@ -70,5 +41,25 @@ class FileController extends Controller
 
         return back()
             ->with('success','You have successfully upload image.');
+    }
+
+    public function convertToImage($fileId)
+    {
+        $file = File::find($fileId);
+        $apiClient = new ApiClient();
+        $response = $apiClient->request('convert_to_jpg', $file->url);
+
+        foreach ($response->data->image as $image) {
+            $image = str_replace('data:image/jpg;base64,', '', $image);
+            $image = str_replace(' ', '+', $image);
+            $imageName = str_random(10).'.'.'jpg';
+            \File::put(public_path('images/' . $imageName), base64_decode($image));
+
+            $img = new Image();
+            $img->file_id = $fileId;
+            $img->url = public_path('images/' . $imageName);
+
+            $img->save();
+        }
     }
 }
