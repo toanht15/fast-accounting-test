@@ -89,7 +89,7 @@
         <table class="table table-striped" id="datatable-buttons">
             <thead>
             <tr class="headings">
-                <th class="column-title" style="width:5%;">File ID</th>
+                <th class="column-title text-center">File ID</th>
                 <th class="column-title text-center">URL</th>
                 <th class="column-title text-center">Action</th>
                 <th class="column-title text-center">Result</th>
