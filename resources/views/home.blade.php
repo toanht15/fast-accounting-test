@@ -101,7 +101,7 @@
                     <td class="text-center">{{$image->file_id}}</td>
                     <td class="text-center"><a href="{{$image->url}}">{{$image->url}}</a></td>
                     <td class="text-center">@if(!isset($image->image_id))<a href="{{URL::route('get_orc_result', ['id' => $image->id])}}">Get ORC result</a>@endif</td>
-                    <td class="text-center">@if(isset($image->image_id))<a href="{{URL::route('view_result', ['imageId' => $file->id])}}">View Result</a>@endif</td>
+                    <td class="text-center">@if(isset($image->image_id))<a href="{{URL::route('view_result', ['imageId' => $image->id])}}">View Result</a>@endif</td>
                 </tr>
             @endforeach
             </tbody>
