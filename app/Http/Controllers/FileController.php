@@ -33,7 +33,7 @@ class FileController extends Controller
 
         $response = $apiClient->convertPdf($url);
 
-        dd($response);
+        dd($response->getBody()->getContents());
 
 
 
