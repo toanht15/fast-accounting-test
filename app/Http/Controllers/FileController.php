@@ -13,7 +13,7 @@ class FileController extends Controller
     public function index()
     {
         $files = File::all();
-        $images = Image::all();
+        $images = Image::leftjoin('results', 'results.image_id', '=', 'images.id')->get();
 
 
         return view()->make('home', [

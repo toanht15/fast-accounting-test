@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Classes\ApiClient;
 use App\Image;
+use App\Result;
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
