@@ -32,7 +32,7 @@ class FileController extends Controller
         $fileName = $file->hashName();
         $file->move(public_path('files'), $fileName);
         $url = url('files/' . $fileName);
-        
+
 
         $f = new File();
         $f->name = $file->getClientOriginalName();
@@ -61,5 +61,7 @@ class FileController extends Controller
 
             $img->save();
         }
+
+        return back();
     }
 }
