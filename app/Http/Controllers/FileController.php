@@ -13,7 +13,9 @@ class FileController extends Controller
     public function index()
     {
         $files = File::all();
-        $images = Image::leftjoin('results', 'results.image_id', '=', 'images.id')->get();
+        $images = Image::leftjoin('results', 'results.image_id', '=', 'images.id')
+            ->select('images.*', 'results.image_id')
+            ->get();
 
 
         return view()->make('home', [
