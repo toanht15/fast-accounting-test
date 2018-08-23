@@ -27,7 +27,8 @@ class FileController extends Controller
 
         $fileName = $file->hashName();
         $file->move(public_path('files'), $fileName);
-        $url = url('files/' . $fileName);
+//        $url = url('files/' . $fileName);
+        $url = url('images/test.jpg');
 
         $apiClient = new ApiClient();
 
@@ -57,7 +58,7 @@ class FileController extends Controller
 
         $response = json_decode($response);
 
-        dd($response->data->image);
+        dd($response);
 
 
 

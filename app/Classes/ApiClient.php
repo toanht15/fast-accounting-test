@@ -5,7 +5,7 @@ namespace App\Classes;
 use GuzzleHttp\Client;
 
 class ApiClient {
-    private $apiDomain = 'https://api-sandbox.fastaccounting.jp/v1.3/convert_to_jpg';
+    private $apiDomain = 'https://api-sandbox.fastaccounting.jp/v1.3/receipt';
 
     public function convertPdf($fileUrl)
     {
