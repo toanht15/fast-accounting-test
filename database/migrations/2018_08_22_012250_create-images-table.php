@@ -17,7 +17,6 @@ class CreateImagesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('file_id');
             $table->string('url');
-            $table->string('result')->nullable();
             $table->foreign('file_id')->references('id')->on('files');
             $table->timestamps();
         });

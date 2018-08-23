@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Classes\ApiClient;
 use App\File;
 use App\Image;
+use App\Result;
 use Illuminate\Http\Request;
 
 class FileController extends Controller
@@ -71,8 +72,12 @@ class FileController extends Controller
         $apiClient = new ApiClient();
         $response = $apiClient->request('receipt', $image->url);
 
-        $image->result = (string)$response;
-        $image->save();
+        $result = new Result();
+        $result->note = $response->data->note;
+        $result->date = $response->data->date;
+        $result->amount = $response->data->amount;
+        $result->tel = $response->data->tel;
+        $result->save();
 
         return back();
     }
