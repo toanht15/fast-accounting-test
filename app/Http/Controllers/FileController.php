@@ -73,10 +73,10 @@ class FileController extends Controller
         $response = $apiClient->request('receipt', $image->url);
 
         $result = new Result();
-        $result->note = $response->data->note;
-        $result->date = $response->data->date;
-        $result->amount = $response->data->amount;
-        $result->tel = $response->data->tel;
+        $result->note = $response->note;
+        $result->date = $response->date;
+        $result->amount = $response->amount;
+        $result->tel = $response->tel;
         $result->save();
 
         return back();
