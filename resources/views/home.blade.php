@@ -85,7 +85,7 @@
     </class>
 
     <class class="row" style="margin-top: 50px;">
-        <h3>ORC結果</h3>
+        <h3>画像一覧</h3>
         <table class="table table-striped" id="datatable-buttons">
             <thead>
             <tr class="headings">
